@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   QUANTUM CORE — cinematic design tokens (Tailwind v4 inline theme)
+   Color language:
+     void      — deepest black background
+     abyss     — slightly raised black for cards
+     violet    — neon violet primary
+     cyan      — electric turquoise accent
+     azure     — luminous blue
+     gold      — rare highlight (capabilities/CTA)
+     ghost     — translucent white for body text
+------------------------------------------------------------------ */
+
+@theme inline {
+  --color-void: #03020a;
+  --color-abyss: #0a0820;
+  --color-violet: #8a5cff;
+  --color-violet-deep: #4a1fb8;
+  --color-cyan: #36e8ff;
+  --color-azure: #2a6bff;
+  --color-gold: #f5d27c;
+  --color-ghost: rgba(255, 255, 255, 0.78);
+
+  --font-display: "Manrope", "Geist", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --shadow-glow-violet: 0 0 60px rgba(138, 92, 255, 0.45);
+  --shadow-glow-cyan: 0 0 60px rgba(54, 232, 255, 0.4);
+}
+
+/* Reset that respects cinematic darkness */
+html,
+body {
+  background: var(--color-void);
+  color: var(--color-ghost);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  /* Lenis owns the scroll — disable native smooth so it doesn't fight us */
+  scroll-behavior: auto;
+  overscroll-behavior: none;
+}
+
+body {
+  /* Allow Lenis to control the body height */
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Lenis required CSS hooks */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Stars / noise background grain over the whole page */
+.cinematic-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+  opacity: 0.35;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-violet);
+  color: white;
+}
+
+/* Reusable utilities */
+@layer utilities {
+  .text-glow-violet {
+    text-shadow: 0 0 24px rgba(138, 92, 255, 0.55),
+      0 0 6px rgba(138, 92, 255, 0.8);
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 24px rgba(54, 232, 255, 0.5),
+      0 0 6px rgba(54, 232, 255, 0.8);
+  }
+  .bg-radial-vignette {
+    background: radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+  }
+  .mask-fade-edges {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
