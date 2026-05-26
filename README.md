@@ -4,9 +4,11 @@
 
 **Lumina Quantum** · машина, считающая реальность
 
-[Demo](#) · [Tech](#стек) · [Запуск](#запуск)
+[**Live →**](https://quantum-core-noxqd.vercel.app) · [Tech](#стек) · [Запуск](#запуск)
 
 </div>
+
+> **Production:** https://quantum-core-noxqd.vercel.app
 
 ---
 
